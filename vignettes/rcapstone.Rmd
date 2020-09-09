@@ -1,0 +1,54 @@
+---
+title: "rcapstone"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{rcapstone}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(rcapstone)
+library(dplyr)
+library(readr)
+library(lubridate)
+library(leaflet)
+```
+
+This packages uses historical data from NOAA about earthquakes.
+eq_clean_data cleans the dataframe, using eq_location_clean internally
+
+```{r read_data}
+file_name <- system.file("extdata", "signif.txt", package = "rcapstone")
+
+raw_data <- file_name %>%
+  readr::read_tsv() %>%
+  eq_clean_data()
+```
+
+You can also create a leaflet showing the earthquakes for a specific country.
+
+```{r leaflet_1}
+
+raw_data %>% 
+  dplyr::filter(COUNTRY == "MEXICO" & lubridate::year(DATE) >= 2000) %>% 
+  eq_map(annot_col = "DATE")
+```
+
+And you can add pop-up texts with more information about the earthquake.
+
+```{r leaflet_2}
+
+raw_data %>%
+  dplyr::filter(COUNTRY == "MEXICO" & lubridate::year(DATE) >= 2000) %>%
+  dplyr::mutate(popup_text = eq_create_label(.)) %>%
+  eq_map(annot_col = "popup_text")
+```
+

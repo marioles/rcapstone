@@ -177,10 +177,20 @@ GeomTimelineLabel <- ggproto("GeomTimelineLabel", Geom,
 #' @examples
 #' \dontrun{
 #' eq_location_clean(eq_clean_data(raw_data)) %>%
-#' dplyr::filter(datetime >= "1960-01-01" & datetime <="2011-01-01" & COUNTRY == c("CHILE","USA"))%>%
+#' dplyr::filter(datetime >= "1960-01-01" &
+#'   datetime <="2011-01-01" &
+#'   COUNTRY == c("CHILE","USA")) %>%
 #' ggplot() +
-#' geom_timeline(aes(x = datetime, y = COUNTRY, size = EQ_MAG_ML, colour = DEATHS, fill = DEATHS)) +
-#' geom_timeline_label(aes(x = datetime, y = COUNTRY, label = LOCATION_NAME, number = 3, max_aes = EQ_MAG_ML))
+#' geom_timeline(aes(x = datetime,
+#'   y = COUNTRY,
+#'   size = EQ_MAG_ML,
+#'   colour = DEATHS,
+#'   fill = DEATHS)) +
+#' geom_timeline_label(aes(x = datetime,
+#'   y = COUNTRY,
+#'   label = LOCATION_NAME,
+#'   number = 3,
+#'   max_aes = EQ_MAG_ML))
 #'}
 #'
 #' @export
@@ -208,6 +218,7 @@ geom_timeline_label <- function(mapping = NULL, data = NULL, stat = "identity",
 #' @return An interactive map.
 #'
 #' @import leaflet
+#' @importFrom dplyr pull
 #'
 #' @examples
 #' \dontrun{
@@ -226,7 +237,7 @@ eq_map <- function(clean_data, annot_col = "DATE"){
                               radius = 2,
                               lng = ~ LONGITUDE,
                               lat = ~ LATITUDE,
-                              popup = ~ paste(pull(clean_data, annot_col)))
+                              popup = ~ paste(dplyr::pull(clean_data, annot_col)))
 }
 
 #' Pop-up annotations in interactive map

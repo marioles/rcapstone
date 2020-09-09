@@ -41,10 +41,20 @@ This function adds location labels
 \examples{
 \dontrun{
 eq_location_clean(eq_clean_data(raw_data)) \%>\%
-dplyr::filter(datetime >= "1960-01-01" & datetime <="2011-01-01" & COUNTRY == c("CHILE","USA"))\%>\%
+dplyr::filter(datetime >= "1960-01-01" &
+  datetime <="2011-01-01" &
+  COUNTRY == c("CHILE","USA")) \%>\%
 ggplot() +
-geom_timeline(aes(x = datetime, y = COUNTRY, size = EQ_MAG_ML, colour = DEATHS, fill = DEATHS)) +
-geom_timeline_label(aes(x = datetime, y = COUNTRY, label = LOCATION_NAME, number = 3, max_aes = EQ_MAG_ML))
+geom_timeline(aes(x = datetime,
+  y = COUNTRY,
+  size = EQ_MAG_ML,
+  colour = DEATHS,
+  fill = DEATHS)) +
+geom_timeline_label(aes(x = datetime,
+  y = COUNTRY,
+  label = LOCATION_NAME,
+  number = 3,
+  max_aes = EQ_MAG_ML))
 }
 
 }
