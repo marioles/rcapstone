@@ -1,11 +1,12 @@
 Package: rcapstone
 Type: Package
-Title: What the Package Does (Title Case)
+Imports: ggplot2, dplyr, magrittr, leaflet, lubridate, stringr, tidyr
+Title: Mastering Softwared Development in R Capstone
 Version: 0.1.0
-Author: Who wrote it
-Maintainer: The package maintainer <yourself@somewhere.net>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
-License: What license is it under?
+Author: Mario Morales
+Maintainer: Mario Morales <yourself@somewhere.net>
+Description: Capstone for the specialization
+License: GMT
 Encoding: UTF-8
 LazyData: true
+RoxygenNote: 7.1.1
